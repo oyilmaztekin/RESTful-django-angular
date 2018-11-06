@@ -1,0 +1,45 @@
+ <div class="container" tween-max-stragger>
+  <div class="row">
+    <div class="col-md-12">
+      <img src="static/images/slogan.png" class="img-responsive center-block" id="slogan" data-parallax="0.1">
+    </div>  
+  </div><!--slogan row-->
+
+  <div class="row" id="geziler-landing" tween-max-stragger>
+    <div class="col-md-4 kesfet-col nopad" data-parallax="0.2">
+      <div class="kesfet-col-in zartlak-border">
+        <img src="static/images/sosyal-geziler2.jpg" alt="" class="img-responsive">
+        <h2>SOSYAL GEZİLER</h2>
+        <ul style="height:108px;overflow:hidden;">
+          <li ng-repeat="rota in rotalar"><span ng-if="rota.parent === 4">{{ rota.baslik }}</span></li>
+        </ul>
+        <a href="javascript:void(0);" class="video-trigger btn-rounded btn btn-zartlak mtop10 btn-lg" click="modal-menu">BAŞVUR</a>
+      </div>
+    </div><!--kesfet col-->
+
+    <div class="col-md-4 kesfet-col nopad" data-parallax="0.3">
+      <div class="kesfet-col-in" id="orta-col">
+        <img src="static/images/tarihi-geziler.jpg" alt="" class="img-responsive">
+        <h2>TARİHİ GEZİLER</h2>
+        <ul style="height:108px;overflow:hidden;">
+          <li ng-repeat="rota in rotalar"><span ng-if="rota.parent === 5">{{ rota.baslik }}</span></li>
+        </ul>
+
+        <a href="javascript:void(0);" class="video-trigger btn-rounded btn btn-turanj mtop10 btn-lg" click="modal-menu">BAŞVUR</a>
+      </div>
+      <div id="kesfet-orta-border"></div>
+    </div><!--col-->
+
+    <div class="col-md-4 kesfet-col nopad" data-parallax="0.4">
+      <div class="kesfet-col-in zartlak-border">
+        <img src="static/images/teknik-geziler.jpg" alt="" class="img-responsive">
+        <h2>TEKNİK GEZİLER</h2>
+        <ul style="height:108px;overflow:hidden;">
+          <li ng-repeat="rota in rotalar"><span ng-if="rota.parent === 6">{{ rota.baslik }}</span></li>
+        </ul>
+
+        <a href="javascript:void(0);" class="video-trigger btn-rounded btn btn-zartlak mtop10 btn-lg" click="modal-menu">BAŞVUR</a>
+      </div>
+    </div>
+  </div>
+        </div><!--end of the container-->

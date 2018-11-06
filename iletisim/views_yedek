@@ -1,0 +1,12 @@
+from rest_framework import viewsets
+from .models import IletisimModel
+from .serializers import IletisimSerializer
+
+
+
+class IletisimView(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = IletisimModel.objects.all()
+    serializer_class = IletisimSerializer

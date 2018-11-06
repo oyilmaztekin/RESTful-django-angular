@@ -1,0 +1,54 @@
+.gezi_baslik_alt{
+    position: relative;
+    margin-top:0px!important;
+    width:100%;
+}
+
+#geziler_ .slide_item{
+   margin-top: 25px;
+}
+
+#geziler_{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.flex_list{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+#geziler_ img:hover{
+    opacity: .6;
+}
+
+.gezi_baslik{
+    text-align: center!important;
+    display: block;
+    margin-top:10px;
+}
+
+.mtop20{
+    margin-top:20px;
+}
+
+.tag_gezi{
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    color:black;
+}
+
+.input-group{
+    margin-top: 40px!important;
+}
+
+.modal-video{
+    overflow: scroll;
+}
+
+.input-group label{
+    font-size: 14px!important;
+}

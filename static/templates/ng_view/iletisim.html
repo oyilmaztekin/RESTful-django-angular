@@ -1,0 +1,88 @@
+<div class="container-fluid" tween-max-stragger>
+ <div class="row">
+  <div class="col-md-12">
+    <img src="static/images/slogan.png" class="img-responsive center-block" id="slogan" data-parallax="0.1">
+  </div>  
+</div><!--slogan row-->
+<div id="container-layer" data-parallax="0.2">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>İletişim</h1>
+    </div>
+
+    <div class="col-md-6" id="iletisim_adress">
+      <address>
+        <strong>Telefon:</strong>
+        <span class="text-muted">0212 455 39 46</span>
+      </address>
+
+      <strong>E-Posta:</strong>
+      <a href="mailto:beyazgezi@ibb.gov.tr"> beyazgezi@ibb.gov.tr</a>
+
+      <address style="margin-top:20px;">
+        <strong>Faks:</strong>
+        <span class="text-muted">0212 455 26 32</span>
+      </address>          
+    </div> <!--col md 6--> 
+
+    <div class="col-md-6 gezi_form bg-white box-shadow">
+      <div class="row">
+        <div class="alert alert-danger" id="fail-form">
+        <div class="text-center h3">Bir sorun ile karşılaşıldı.</div>
+        <p id="errorMessage" class="text-center"></p>
+      </div>  
+      </div>
+      
+
+      <form name="contactForm" ng-submit="submitForm()" id="contact-form" method="POST">
+        <span csrf-token id="csrfIletisim"></span>
+        <div class="form_item color-gray-light">
+          <div class="input-group">
+            <label for="ad_soyad">Ad Soyad:</label>
+            <span class="text-danger" ng-show="contactForm.ad_soyad.$invalid && contactForm.ad_soyad.$touched">ad soyad: Zorunlu alan</span>
+            <input type="text" name="ad_soyad" ng-required="true" ng-model="ad_soyad" id="ad_soyad" placeholder="Buraya Yazınız"></input>
+          </div><!--inpıut group-->
+        </div><!--form item-->
+
+
+        <div class="form_item color-gray-light">
+          <div class="input-group">
+            <label for="email">Email:</label>
+            <span class="text-danger" ng-show="contactForm.email.$invalid && contactForm.email.$touched">email: Zorunlu alan</span>
+            <input type="email" ng-required="true" name="email" id="email" ng-model="email" placeholder="Buraya Yazınız"></input>
+          </div>
+        </div><!--form item-->
+
+        <div class="form_item color-gray-light">
+          <div class="input-group">
+            <label for="mesaj">
+              Mesajınız 
+            </label> 
+            <span class="text-danger" ng-show="contactForm.mesaj.$invalid && contactForm.mesaj.$touched">mesaj: Zorunlu alan</span>
+            <textarea id="mesaj" ng-required="true" name="mesaj" ng-model="mesaj" rows="3" cols="50" placeholder="Buraya Yazınız"></textarea>
+          </div>
+        </div><!--form item-->
+
+        <button type="submit" class="btn btn-block btn-zartlak btn-lg mtop40" id="gonder_btn"></button>
+        <br>
+
+      </form>
+    </div>
+
+    <div class="col-md-6 text-center" id="success-form">
+      <img src="static/images/ok_zartlak.png" style="width:300px;">
+      <div class="h3">
+        <span class="black">Başvurunuz bize ulaştı.</span><br>
+      </div>
+      <div>
+        <span class="gray thin">En kısa sürede size geri dönüş sağlayacağız.</span>
+      </div>
+    </div><!--success-->
+
+
+  </div><!--row-->
+
+
+
+ </div><!--end of the container-->
+</div>

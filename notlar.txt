@@ -1,0 +1,9 @@
+virtualenv source ile aktif olmuyor ancak wshi üzerinde aktif. bu yüzden venv silmek yerine ikinci bir env kuruldu. collectstatic gibi komutlar sourve env/bin/activate ile çalıştırılmalı.
+
+
+1- settings.py düzenlendi
+2- url düzenlendi
+3- ana view index eklendi
+3- pip3 install django-ratelimit
+4- iletisim view
+5- admin seyidahmet_siteyonetimi olarak değiştirildi

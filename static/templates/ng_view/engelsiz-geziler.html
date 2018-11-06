@@ -1,0 +1,32 @@
+ <div class="container-fluid" tween-max-stragger>
+ <div class="row">
+  <div class="col-md-12">
+    <img src="static/images/slogan.png" class="img-responsive center-block" id="slogan" data-parallax="0.1">
+  </div>  
+</div><!--slogan row-->
+<div id="container-layer" data-parallax="0.2" tween-max-stragger>
+  <div class="row" id="geziler_">
+     <div class="col-md-12">
+          <h1>Engelsiz Geziler</h1>
+         <p>Erişilebilir Turizm Engelsiz İstanbul projesi kapsamında, engelli bireylerin erişimine uygun hale getirilen gezi noktaları…</p>
+        </div>
+
+       <div class="slide_item col-md-3" ng-repeat="gezi in engelsiz_rotalar">
+            <a href="#!/geziler/{{ gezi.slug }}/&={{ gezi.id }}">
+                <img src="{{gezi.foto}}" alt="{{ gezi.baslik }}" class="img-responsive">
+                <span class="gezi_baslik">{{ gezi.baslik }}</span>
+
+                <span class="tag_gezi">
+                    <span ng-show="{{ gezi.parent === 5 }}"> Tarihi Gezi</span>
+                    <span ng-show="{{ gezi.parent === 7 }}"> Engelsiz Gezi</span>
+                    <span ng-show="{{ gezi.parent === 6 }}"> Teknik Gezi</span>
+                    <span ng-show="{{ gezi.parent === 4 }}"> Sosyal Gezi</span>
+                </span>
+
+            </a>
+          </div><!--slide item-->
+  </div><!--row-->
+
+    </div><!--end of the container-->
+
+  </div>

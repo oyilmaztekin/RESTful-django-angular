@@ -1,0 +1,377 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="tr">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Beyaz Gezi</title>
+
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<!-- Place favicon.ico in the root directory -->
+
+
+
+	<link rel="stylesheet" href={% static "css/main.css" %} >
+    <link rel="stylesheet" href={% static "css/overridden.css" %} >
+	<style type="text/css">
+	#geziler_slide .slide_item{
+
+		float:left;
+		padding:0px 0px;
+		margin-left:30px;
+		width: 266px;
+		position: relative;
+		max-height: 160px;
+	}
+
+	.gezi_form .form_item input {
+		width:100%!important;
+		outline:0 none;
+	}
+
+	#fail{
+		position: fixed;
+		z-index: 5;
+		width: 100%;
+	}
+	#success{
+		position: fixed;
+		z-index: 5;
+		width: 100%;	
+	}
+</style>
+
+<!--<script src="https://code.angularjs.org/1.6.6/angular.js"></script>-->
+<script type="text/javascript" src={% static "js/angularjs.js" %}></script>
+<script type="text/javascript" src={% static "js/angular-ui-router.min.js" %}></script>
+<script type="text/javascript" src={% static "js/angular-cookies.js" %}></script>
+<script type="text/javascript" src={% static "js/angular.sanitize.min.js" %}></script>
+
+
+<script src={% static "js/vendor/modernizr.js" %}></script>
+
+
+</head>
+<body class="body" ng-app="angularApp">
+
+	<div class="alert alert-danger" id="fail">
+		<div class="text-center h3">Bir sorun ile karşılaşıldı.</div>
+		<p id="errorMessageTop" class="text-center"></p>
+	</div>
+
+	<div class="alert alert-success" id="success">
+		<div class="text-center h3">İşlem Tamamlandı</div>
+		<p id="successMessage" class="text-center"></p>
+	</div>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div class="loader"></div>
+  <div class="loader-white"></div>
+  <h1 class="loader-title"><img src={% static "images/puff.svg" %} style="width:120px;" alt="Yükleniyor..."></h1>
+
+  <div class="container-fluid">
+  	<div id="landing">
+  		<header class="container" role="banner" aria-label="Site başlık içerikleri, navigasyon logolar ve benzeri gibi..." tabindex="-1" id="header">
+  			<div class="row">
+  				<!--<h3 class="pull-left">BEYAZ GEZİ</h3>-->
+  				<div class="pull-left"><img src={% static "images/logo.png" %} alt="Logo" style="width:145px; margin-top:22px;"></div>
+  				<nav class="pull-right navbar"  aria-label="site içi">
+  					<ul class="nav nav-pills" tween-max-stragger>
+  						<li><a href="#!/">Anasayfa</a></li>
+  						<li><a href="#!/kurumsal">Kurumsal</a></li>
+  						<li><a href="#!/geziler">Gezi Rotaları</a></li>
+  						<li><a href="#!/engelsiz-geziler">Engelsiz Geziler</a></li>
+  						<li><a href="#!/sss">Merak Edilenler</a></li>
+  						<li><a href="#!/iletisim">İletişim</a></li>
+  						<li><a href="javascript:void(0);" class="video-trigger btn-rounded btn btn-zartlak" click="modal-menu">BAŞVUR</a></li>
+  					</ul>
+  				</nav>
+  			</div>
+  		</header><!--header-->
+  		<!-- ========== UI VIEW ============ -->
+
+  		{% verbatim ui_view %}
+  		<ui-view></ui-view>
+  		{% endverbatim ui_view %}	
+
+  		<!-- ========== UI VIEW ============ -->
+
+  	</div><!--landing sonu-->
+  </div><!--end of container-fluid-->
+
+  <section id="haber" class="container" data-parallax="0.2">
+  	<div class="row">
+  		{% for haber in haberler %}
+  		<div class="col-md-6 haber_col" >
+  			<div class="row">
+  				<div class="col-md-5 haber_img_uzun">
+  					{% if haber.foto_url != null %}
+  					<img src="{{ haber.foto_url }}" alt="{{ haber.baslik }}">
+  					{% else %}
+  					<img src="{{ haber.foto }}" alt="{{ haber.baslik }}">    
+  					{% endif %}
+  				</div><!--imaj-->
+  				<div class="col-md-7 haber_icerik">
+  					<h2 class="nomar">{{ haber.baslik }}</h2>
+  					<p class="mtop10">{{ haber.icerik|safe|truncatechars_html:259 }} </p>
+  					<a href="#!/haberler/{{ haber.slug }}/&={{ haber.id }}" class="btn-rounded btn mtop10 btn-ghost-mavi">Devamını Oku</a>  
+  				</div><!--haber içerik-->
+  			</div><!--row-->
+  		</div><!--haber col item-->
+
+  		{% endfor %}
+
+  	</section><!--haberler section-->
+  	<section id="geziler_slide" class="hidden-xs"> 
+  		<div class="container-fluid">
+  			<div class="row gezi_form mtop60">
+  				<form action="#" method="post" id="gezi_slide_search">
+
+          <!--<div class="form_item" style="color:#efefef;">
+            <i class="glyphicon glyphicon-search color-gray-light"></i>
+            <input type="text" name="search" id="slide_search" class="input_line" placeholder="Arama" tabindex="1" />
+        </div>-->
+
+        <!--<div class="form_item col-md-3">
+        	<select name="select-choice" id="select-choice" class="input_line">
+        		<option value="Choice 1">Sosyal Geziler</option>
+        		<option value="Choice 2">Tarihi Geziler</option>
+        		<option value="Choice 3">Teknik Geziler</option>
+        	</select>
+        	<i class="glyphicon glyphicon-menu-down color-gray-light"></i>
+        </div>-->
+    </form>
+    <div class="col-md-2">
+    	<a href="#" class="btn zartlak-link">Tümünü Gör <i class="glyphicon glyphicon-arrow-right"></i></a>
+    </div>
+
+    <div class="pull-right controller">
+    	<a href="#" id="prev" class="btn-rounded btn mtop10 btn-ghost-zartlak"><i class="glyphicon glyphicon-arrow-left"></i></a>  
+    	<a href="#" id="next" class="btn-rounded btn mtop10 btn-ghost-zartlak"><i class="glyphicon glyphicon-arrow-right"></i></a>  
+    </div>
+
+</div><!--row-->
+
+
+</div><!--container-fluid-->
+
+
+<div class="slideshow" data-cycle-fx=carousel data-cycle-timeout=0  data-cycle-carousel-fluid=true  data-cycle-next="#next"
+data-cycle-prev="#prev" data-cycle-slides="div" data-parallax="0.2">
+
+{% for rota in rotalar %}
+<div class="slide_item">
+	<a href="#!/geziler/{{ rota.slug }}/&={{ rota.id }}" onclick="PageTop();">
+		<h3 style="font-size:16px!important;">{{ rota.baslik }}</h3>
+		<span class="tag">{{ rota.parent }}</span>
+		<span class="filter" style="opacity: .04!important;"></span>
+		{% if rota.foto %}
+		<img src={{ rota.foto }} alt="placeholder+image" class="img-responsive">
+		{% else %}
+		<img src={{ rota.foto_url }} alt="placeholder+image" class="img-responsive">
+		{% endif %}
+	</a>
+</div><!--slide item-->	
+{% endfor %}
+
+</section>
+
+<section class="mavi-bg container-fluid" id="beyaz_gezi_ozet">
+	<div id="mavi_bg">
+		<div class="container">       
+			<div id="kurumsal_kultur" class="col-md-4" data-parallax="0.2">
+				<h3>Beyaz Gezi Hizmetleri</h3>
+				<p>Beyaz Gezi, dönemin İstanbul Büyükşehir Belediye Başkanı Sayın Recep Tayyip Erdoğan tarafından 1995 yılında İBB hizmet ve yatırımlarını tanıtmak amacıyla faaliyete başladı.</p>
+				<div data-parallax="0.1">
+					<h3>Kimlere Gezi Yapılıyor?</h3>
+					<ul class="list-unstyled">
+						<li>Halk Grupları </li>
+						<li>Öğrenci Grupları </li>
+						<li>Engelli Grupları </li>
+						<li>Sivil Toplum Kuruluşları </li>
+						<li>Dernekler </li>
+						<li>Meslek Grupları </li>
+						<li>Dış Heyet Grupları </li>
+						<li>Protokol Grupları </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<h4>E-Posta</h4>
+				<a href="mailto:beyazgezi@ibb.gov.tr">beyazgezi@ibb.gov.tr</a>
+			</div>
+			<div class="col-md-3">
+				<h4>Telefon</h4>
+				<address>
+					<span class="text-muted">0212 455 39 46</span><br>
+				</address>
+			</div>
+			<div class="col-md-3">
+				<h4>Fax</h4>
+				<address>
+					<span class="text-muted">0212 455 26 32</span><br>
+				</address>
+			</div>
+			<div class="col-md-3" id="copyright">
+				<span class="text-muted">İBB Halkla İlişkiler Müdürlüğü</span><br>
+				<span class="text-muted">Beyaz Gezi | 2018</span>
+			</div>
+		</div>
+	</div><!--container-->
+</div>
+</div>
+
+<!-- ===== FORM MODAL ====== -->
+
+<div class="modal-video modal-menu" ng-controller="basvurCtrl">
+	<div class="close-video modal-menu" id="modal-menu"></div>
+	<div class="modal-inner container">
+		<h2>GEZİYE BAŞVUR</h2>
+		<div class="row" id="modal_basvuru_formu">
+			<!--<p>En az 30 kişiden oluşan grubunuz olduğunda bizlere aşağıda yer alan iletişim adreslerimizden ulaşabilirsiniz; </p>-->
+			<div class="col-md-6 col-md-offset-3 gezi_form bg-white box-shadow mtop10" id="modal_form">
+				<div class="row">
+					<div class="alert alert-danger" id="fail-form2">
+						<div class="text-center h3">Bir sorun ile karşılaşıldı.</div>
+						<p id="errorMessage2" class="text-center"></p>
+					</div>  
+				</div>
+				{% verbatim form %}
+				<form name="basvurForm" ng-submit="submitBasvurForm()" id="basvurForm" method="POST">
+					<span csrf-token></span>
+					<div class="form_item color-gray-light">
+						<label for="select_">Gezi Seçiniz</label>
+						<span class="text-danger" ng-show="basvurForm.katBaslik.$invalid && basvurForm.katBaslik.$touched && basvurForm.katBaslik.$error.required">Gezi Türü: Zorunlu alan</span>
+						<select name="select_" id="select_" class="katBaslik" ng-model="katBaslik" ng-required="true" required>
+							<option ng-repeat="kat in kategori" value="{{ kat.baslik }}">{{ kat.baslik }}</option>
+						</select>
+						<i class="glyphicon glyphicon-menu-down color-gray-light"></i>
+					</div><!--form item-->
+
+                    <!--<div class="form_item color-gray-light">
+                        <div class="input-group">
+						<label for="select_">Başvuru Türü</label>
+						<span class="text-danger" ng-show="basvurForm.basTuru.$invalid && basvurForm.basTuru.$touched && basvurForm.basTuru.$error.required">Gezi Türü: Zorunlu alan</span>
+						<select name="select_" id="basTuru" class="input_line" ng-model="basTuru" ng-required="true" required>
+							<option value="bireysel">Bireysel</option>
+                            <option value="grup">Grup </option>
+						</select>
+						<i class="glyphicon glyphicon-menu-down color-gray-light"></i>
+                        </div>
+					</div>--><!--form item-->
+
+					<div class="form_item color-gray-light">
+						<div class="input-group">
+							<label for="ad_soyad">Ad Soyad:</label>
+							<span class="text-danger" ng-show="basvurForm.ad_soyad.$invalid && basvurForm.ad_soyad.$touched">ad soyad: Zorunlu alan</span>
+							<input type="text" name="ad_soyad" ng-required="true" ng-model="ad_soyad" placeholder="Buraya Yazınız"></input>
+						</div><!--inpıut group-->
+					</div><!--form item-->
+
+
+                    <div class="form_item color-gray-light">
+						<div class="input-group">
+							<label for="telefon">Telefon:</label>
+							<span class="text-danger" ng-show="basvurForm.telefon.$invalid && basvurForm.telefon.$touched">Telefon: Bir telefon numarası girmelisiniz</span>
+							<input type="number" name="telefon" ng-required="true" ng-model="telefon" placeholder="Buraya Yazınız"></input>
+						</div><!--inpıut group-->
+					</div><!--form item-->
+
+
+					<div class="form_item color-gray-light">
+						<div class="input-group">
+							<label for="email">Email:</label>
+							<span class="text-danger" ng-show="basvurForm.email.$invalid && basvurForm.email.$touched">email: Zorunlu alan</span>
+							<input type="email" ng-required="true" name="email" ng-model="email" placeholder="Buraya Yazınız"></input>
+						</div>
+					</div><!--form item-->
+					
+					<div class="form_item color-gray-light">
+						<div class="input-group">
+							<label for="mesaj">
+								Mesajınız 
+							</label> 
+							<span class="text-danger" ng-show="basvurForm.mesaj.$invalid && basvurForm.mesaj.$touched">mesaj: Zorunlu alan</span>
+							<textarea id="mesaj" ng-required="true" name="mesaj" ng-model="mesaj" rows="3" cols="50" placeholder="Buraya Yazınız"></textarea>
+						</div>
+					</div>
+					<!--<div class="form_item color-gray-light">
+						<div class="input-group">
+							<label for="file">
+								Grup Listesi 
+								<small class="pull-right">
+									<a href="#">Örnek Liste 
+										<i class="glyphicon glyphicon-download-alt"></i> 
+									</a>
+								</small> 
+							</label> 
+							<input type="file" name="file" id="file"></input>
+						</div>
+					</div>--><!--form item-->
+
+					<div class="vazgec-form pull-left close-modal" id="modal-menu">
+						Vazgeç
+					</div>
+					<button type="submit" class="basvur-form pull-left" id="gonder_btn2"></button>
+
+				</form>
+				{% endverbatim form %}
+			</div><!--col md-->
+
+		</div><!--row-->
+
+		<div class="row text-center" id="modal_basvuru_sonucu">
+			<img src={% static "images/ok.png" %} alt="" class="center-block">
+			<h3>
+				<span class="black">Başvurunuz bize ulaştı.</span><br>
+				<span class="white thin">En kısa sürede size geri dönüş sağlayacağız.</span>
+			</h3>
+		</div><!--row-->
+
+	</div><!--modal inner-->
+</div><!--modal menü sonu-->
+
+<script type="text/javascript">
+	var csrf_token = "{% csrf_token %}";
+</script>
+
+<script type="text/javascript">
+	function PageTop(){
+		$('html, body').animate({scrollTop: $("#container-layer").offset().top-120}, 300);
+	}
+</script>
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+/*
+(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+	function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+e.src='https://www.google-analytics.com/analytics.js';
+r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+ga('create','UA-XXXXX-X');ga('send','pageview');
+*/
+</script>
+
+
+<script src={% static "js/vendor.js" %}></script>
+
+<script src={% static "js/plugins.js" %}></script>
+<script src={% static "js/nitro.js" %}></script>
+
+<script src={% static "js/main.js" %}></script>
+<script src={% static "js/mvc/ng-config.js" %}></script>
+<script src={% static "js/mvc/ng-routers.js" %}></script>
+<script src={% static "js/mvc/ng-controllers.js" %}></script>
+<script src={% static "js/angular-locale_tr-tr.js" %}></script>
+</body>
+</html>

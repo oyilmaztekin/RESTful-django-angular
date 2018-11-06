@@ -1,0 +1,37 @@
+<div class="container" tween-max-stragger>
+  <div class="row">
+    <div class="col-md-12">
+      <img src="static/images/slogan.png" class="img-responsive center-block" id="slogan" data-parallax="0.1">
+    </div>  
+  </div><!--slogan row-->
+  <ul id="container-layer" data-parallax="0.2">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h1>{{ gezi.baslik }}</h1>
+      </div>
+      <div class="col-md-10 col-md-offset-1">
+        <span ng-show="gezi.foto_url !== null">
+          <img class="img-responsive" src="{{ gezi.foto_url }}" alt="">
+        </span>
+
+        <span ng-show="gezi.foto !== null">
+          <img class="img-responsive" src="{{ gezi.foto }}" alt="">
+        </span>
+
+        <div ng-bind-html="contextHTML"></div>
+
+      </div><!--col md sonu-->
+    </div><!--row-->
+
+      <ul class="row flex_list box-shadow" style="list-style-type: none; margin-top:20px;">
+
+          <li ng-repeat="foto in gezi_foto" class="col-sm-6 col-md-6 mtop20">
+              <img src="{{ foto.foto }}" alt="" class="img-responsive">
+          </li>
+
+      </ul>
+
+      <ul class="row videoRepeat" style="list-style-type: none; margin-top:20px;">
+
+      </ul><!--videolar row-->
+</div><!--end of the container-->

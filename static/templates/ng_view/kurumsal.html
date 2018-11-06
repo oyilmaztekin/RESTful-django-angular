@@ -1,0 +1,25 @@
+<div class="container" tween-max-stragger>
+  <div class="row">
+    <div class="col-md-12">
+      <img src="static/images/slogan.png" class="img-responsive center-block" id="slogan" data-parallax="0.1">
+    </div>  
+  </div><!--slogan row-->
+  <div id="container-layer" data-parallax="0.2">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h1>{{ kurumsal.baslik }}</h1>
+      </div>
+      <div class="col-md-10 col-md-offset-1">
+        <span ng-show="kurumsal.foto_url !== null">
+          <img class="img-responsive" src="{{ kurumsal.foto_url }}" alt="">
+        </span>
+
+        <span ng-show="kurumsal.foto !== null">
+          <img class="img-responsive" src="{{ kurumsal.foto }}" alt="">
+        </span>
+
+        <div ng-bind-html="kurumsalHTML"></div>
+
+      </div><!--col md sonu-->
+    </div><!--row-->
+</div><!--end of the container-->
