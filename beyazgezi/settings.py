@@ -121,7 +121,7 @@ DEBUG_TOOLBAR_PANELS = [
    'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-INTERNAL_IPS = ['127.0.0.1', '10.7.154.254']
+INTERNAL_IPS = ['127.0.0.1', '*']
 
 ROOT_URLCONF = PRODUCT+'.urls'
 
